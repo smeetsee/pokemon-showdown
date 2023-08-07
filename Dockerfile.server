@@ -1,0 +1,36 @@
+FROM node:20-alpine
+
+RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite fontconfig \
+    && adduser --disabled-password --home /home/container container
+
+WORKDIR /opt/pokemon-showdown
+
+# Clone the server
+RUN git clone https://github.com/smogon/pokemon-showdown.git server && rm -rf /opt/pokemon-showdown/server/.git
+WORKDIR /opt/pokemon-showdown/server
+
+# Disable console & backdoor
+RUN sed -ie 's/exports.backdoor = true;/exports.backdoor = false;/g' config/config-example.js
+RUN sed -ie 's/exports.consoleips = ['127.0.0.1'];/exports.consoleips = [];/g' config/config-example.js
+
+# Build the server
+RUN node build
+
+# Symlink the config files from /home/container
+RUN ln -s /home/container/server/config/avatars /opt/pokemon-showdown/server
+RUN ln -s /home/container/server/config/avatars.json /opt/pokemon-showdown/server
+RUN ln -s /home/container/server/config/chat-plugins /opt/pokemon-showdown/server
+RUN ln -s /home/container/server/config/chatrooms.json /opt/pokemon-showdown/server
+RUN ln -s /home/container/server/config/config.js /opt/pokemon-showdown/server
+RUN ln -s /home/container/server/config/ladders /opt/pokemon-showdown/server
+RUN ln -s /home/container/server/config/usergroups.csv /opt/pokemon-showdown/server
+
+# Run the container
+USER container
+ENV  USER=container HOME=/home/container
+
+WORKDIR /home/container
+
+COPY ./entrypoint.server.sh /entrypoint.sh
+
+CMD ["/bin/bash", "/entrypoint.sh"]
