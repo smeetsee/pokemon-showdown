@@ -1,0 +1,9 @@
+[submodule "server"]
+	path = server
+	url = https://github.com/smogon/pokemon-showdown.git
+[submodule "client"]
+	path = client
+	url = https://github.com/smogon/pokemon-showdown-client.git
+[submodule "loginserver"]
+	path = loginserver
+	url = https://github.com/smogon/pokemon-showdown-loginserver.git
