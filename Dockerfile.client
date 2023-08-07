@@ -1,0 +1,41 @@
+FROM alpine:latest AS builder
+
+# First, install Git. Sadly, it seems no 'reliable' multi-architecture image exists for this.
+RUN apk add --no-cache git
+
+# Clone the client code.
+WORKDIR /opt/pokemon-showdown
+RUN git clone https://github.com/smogon/pokemon-showdown-client.git client && rm -rf /opt/pokemon-showdown/client/.git
+
+# Remove the 'creator username formatting'
+COPY client-remove-sysop.patch /client-remove-sysop.patch
+RUN git apply /client-remove-sysop.patch
+
+
+# We need the Caddy binary to be available later on
+FROM caddy:alpine AS caddy
+
+# Actual container
+FROM node:20-alpine3.18
+
+RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite fontconfig \
+    && adduser --disabled-password --home /home/container container
+
+# Copy over the client code from the builder stage
+WORKDIR /opt/pokemon-showdown/client
+COPY --from=builder /opt/pokemon-showdown/client /opt/pokemon-showdown/
+
+# Copy the Caddy binary
+COPY --from=caddy /usr/bin/caddy /usr/bin/caddy
+ENV XDG_CONFIG_HOME /home/container/caddy/config
+ENV XDG_DATA_HOME /home/container/caddy/data
+
+# Run the container
+USER container
+ENV  USER=container HOME=/home/container
+
+WORKDIR /home/container
+
+COPY ./entrypoint.client.sh /entrypoint.sh
+
+CMD ["/bin/bash", "/entrypoint.sh"]

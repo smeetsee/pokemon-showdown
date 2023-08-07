@@ -1,0 +1,12 @@
+diff --git a/config/config-example.js b/config/config-example.js
+index db07ffc0..2a5076f9 100644
+--- a/config/config-example.js
++++ b/config/config-example.js
+@@ -28,7 +28,3 @@ Config.defaultserver = {
+ 
+ Config.roomsFirstOpenScript = function () {
+ };
+-
+-Config.customcolors = {
+-	'zarel': 'aeo'
+-};
