@@ -17,13 +17,13 @@ RUN sed -ie 's/exports.consoleips = ['127.0.0.1'];/exports.consoleips = [];/g' c
 RUN node build
 
 # Symlink the config files from /home/container
-RUN ln -s /home/container/server/config/avatars /opt/pokemon-showdown/server
-RUN ln -s /home/container/server/config/avatars.json /opt/pokemon-showdown/server
-RUN ln -s /home/container/server/config/chat-plugins /opt/pokemon-showdown/server
-RUN ln -s /home/container/server/config/chatrooms.json /opt/pokemon-showdown/server
-RUN ln -s /home/container/server/config/config.js /opt/pokemon-showdown/server
-RUN ln -s /home/container/server/config/ladders /opt/pokemon-showdown/server
-RUN ln -s /home/container/server/config/usergroups.csv /opt/pokemon-showdown/server
+RUN ln -s /home/container/server/config/avatars /opt/pokemon-showdown/server \
+ && ln -s /home/container/server/config/avatars.json /opt/pokemon-showdown/server \
+ && ln -s /home/container/server/config/chat-plugins /opt/pokemon-showdown/server \
+ && ln -s /home/container/server/config/chatrooms.json /opt/pokemon-showdown/server \
+ && ln -s /home/container/server/config/config.js /opt/pokemon-showdown/server \
+ && ln -s /home/container/server/config/ladders /opt/pokemon-showdown/server \
+ && ln -s /home/container/server/config/usergroups.csv /opt/pokemon-showdown/server
 
 # Run the container
 USER container
