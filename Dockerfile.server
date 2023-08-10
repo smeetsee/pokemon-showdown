@@ -10,8 +10,8 @@ RUN git clone https://github.com/smogon/pokemon-showdown.git server && rm -rf /o
 WORKDIR /opt/pokemon-showdown/server
 
 # Disable console & backdoor
-RUN sed -ie 's/exports.backdoor = true;/exports.backdoor = false;/g' config/config-example.js
-RUN sed -ie 's/exports.consoleips = ['127.0.0.1'];/exports.consoleips = [];/g' config/config-example.js
+RUN sed -ie 's/exports.backdoor = true;/exports.backdoor = false;/g' config/config-example.js \
+ && sed -ie 's/exports.consoleips = ['127.0.0.1'];/exports.consoleips = [];/g' config/config-example.js
 
 # Build the server
 RUN node build
