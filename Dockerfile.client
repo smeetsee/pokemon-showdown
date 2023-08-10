@@ -8,6 +8,7 @@ WORKDIR /opt/pokemon-showdown
 RUN git clone https://github.com/smogon/pokemon-showdown-client.git client && rm -rf /opt/pokemon-showdown/client/.git
 
 # Remove the 'creator username formatting'
+WORKDIR /opt/pokemon-showdown/client
 COPY client-remove-sysop.patch /client-remove-sysop.patch
 RUN git apply /client-remove-sysop.patch
 
