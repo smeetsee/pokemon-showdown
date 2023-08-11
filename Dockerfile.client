@@ -24,7 +24,7 @@ RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite
 
 # Copy over the client code from the builder stage
 WORKDIR /opt/pokemon-showdown/client
-COPY --from=builder /opt/pokemon-showdown/client /opt/pokemon-showdown/
+COPY --from=builder /opt/pokemon-showdown/client /opt/pokemon-showdown/client
 
 # Copy the Caddy binary
 COPY --from=caddy /usr/bin/caddy /usr/bin/caddy
