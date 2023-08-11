@@ -5,8 +5,14 @@ cd /home/container
 if [ ! -e /home/container/server/config/avatars ]; then
   cp -r /opt/pokemon-showdown/server/config.template/avatars /home/container/server/config
 fi
+if [ ! -e /home/container/server/config/avatars.json ]; then
+  cp -r /opt/pokemon-showdown/server/config.template/avatars.json /home/container/server/config
+fi
 if [ ! -e /home/container/server/config/chat-plugins ]; then
   cp -r /opt/pokemon-showdown/server/config.template/chat-plugins /home/container/server/config
+fi
+if [ ! -e /home/container/server/config/chatrooms.json ]; then
+  cp -r /opt/pokemon-showdown/server/config.template/chatrooms.json /home/container/server/config
 fi
 if [ ! -e /home/container/server/config/ladders ]; then
   cp -r /opt/pokemon-showdown/server/config.template/ladders /home/container/server/config
@@ -16,6 +22,9 @@ if [ ! -e /home/container/server/config/hosts.csv ]; then
 fi
 if [ ! -e /home/container/server/config/proxies.csv ]; then
   cp -r /opt/pokemon-showdown/server/config.template/proxies.csv /home/container/server/config
+fi
+if [ ! -e /home/container/server/config/config.js ]; then
+  cp -r /opt/pokemon-showdown/server/config.template/config.js /home/container/server/config
 fi
 
 # Replace Startup Variables
