@@ -1,6 +1,8 @@
 #!/bin/bash
 cd /home/container
 
+mkdir -p /home/container/server/config
+
 # Create config files & directories
 if [ ! -e /home/container/server/config/avatars ]; then
   cp -r /opt/pokemon-showdown/server/config.template/avatars /home/container/server/config
