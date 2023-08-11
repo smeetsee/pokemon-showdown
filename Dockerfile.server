@@ -6,24 +6,33 @@ RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite
 WORKDIR /opt/pokemon-showdown
 
 # Clone the server
-RUN git clone https://github.com/smogon/pokemon-showdown.git server && rm -rf /opt/pokemon-showdown/server/.git
-WORKDIR /opt/pokemon-showdown/server
-
+RUN git clone https://github.com/smogon/pokemon-showdown.git server \
+ && rm -rf /opt/pokemon-showdown/server/.git \
 # Disable console & backdoor
-RUN sed -i 's/exports.backdoor = true;/exports.backdoor = false;/g' config/config-example.js \
- && sed -i 's/exports.consoleips = ['127.0.0.1'];/exports.consoleips = [];/g' config/config-example.js
+ && sed -i 's/exports.backdoor = true;/exports.backdoor = false;/g' config/config-example.js \
+ && sed -i 's/exports.consoleips = ['127.0.0.1'];/exports.consoleips = [];/g' config/config-example.js \
+ && mkdir /opt/pokemon-showdown/server/config.template \
+ && cp /opt/pokemon-showdown/server/config/avatars /opt/pokemon-showdown/server/config.template \
+ && cp /opt/pokemon-showdown/server/config/avatars.json /opt/pokemon-showdown/server/config.template \
+ && cp /opt/pokemon-showdown/server/config/chat-plugins /opt/pokemon-showdown/server/config.template \
+ && cp /opt/pokemon-showdown/server/config/chatrooms.json /opt/pokemon-showdown/server/config.template \
+ && cp /opt/pokemon-showdown/server/config/config.js /opt/pokemon-showdown/server/config.template \
+ && cp /opt/pokemon-showdown/server/config/ladders /opt/pokemon-showdown/server/config.template \
+ && cp /opt/pokemon-showdown/server/config/hosts.csv /opt/pokemon-showdown/server/config.template \
+ && cp /opt/pokemon-showdown/server/config/proxies.csv /opt/pokemon-showdown/server/config.template
+WORKDIR /opt/pokemon-showdown/server
 
 # Build the server
 RUN node build
 
 # Symlink the config files from /home/container
-RUN ln -s /home/container/server/config/avatars /opt/pokemon-showdown/server \
- && ln -s /home/container/server/config/avatars.json /opt/pokemon-showdown/server \
- && ln -s /home/container/server/config/chat-plugins /opt/pokemon-showdown/server \
- && ln -s /home/container/server/config/chatrooms.json /opt/pokemon-showdown/server \
- && ln -s /home/container/server/config/config.js /opt/pokemon-showdown/server \
- && ln -s /home/container/server/config/ladders /opt/pokemon-showdown/server \
- && ln -s /home/container/server/config/usergroups.csv /opt/pokemon-showdown/server
+RUN ln -sf /home/container/server/config/avatars /opt/pokemon-showdown/server/config \
+ && ln -sf /home/container/server/config/avatars.json /opt/pokemon-showdown/server/config \
+ && ln -sf /home/container/server/config/chat-plugins /opt/pokemon-showdown/server/config \
+ && ln -sf /home/container/server/config/chatrooms.json /opt/pokemon-showdown/server/config \
+ && ln -sf /home/container/server/config/config.js /opt/pokemon-showdown/server/config \
+ && ln -sf /home/container/server/config/ladders /opt/pokemon-showdown/server/config \
+ && ln -sf /home/container/server/config/usergroups.csv /opt/pokemon-showdown/server/config
 
 # Run the container
 USER container
