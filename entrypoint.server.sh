@@ -25,6 +25,9 @@ fi
 if [ ! -e /home/container/server/config/proxies.csv ]; then
   cp -r /opt/pokemon-showdown/server/config.template/proxies.csv /home/container/server/config
 fi
+if [ ! -e /home/container/server/config/usergroups.csv ]; then
+  touch /home/container/server/config/usergroups.csv
+fi
 
 # Replace Startup Variables
 MODIFIED_STARTUP=`eval echo $(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')`
