@@ -3,7 +3,7 @@ cd /home/container
 
 mkdir -p /home/container/server/dist
 mkdir -p /home/container/server/config
-ln -sf /home/container/server/node_modules /opt/pokemon-showdown/server
+ln -sf /opt/pokemon-showdown/server/node_modules /home/container/server
 
 # Create config files & directories
 if [ ! -e /home/container/server/config/avatars ]; then
