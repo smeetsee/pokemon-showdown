@@ -6,7 +6,7 @@ if [ ! -e /home/container/server/config/avatars ]; then
   cp -r /opt/pokemon-showdown/server/config.template/avatars /home/container/server/config
 fi
 if [ ! -e /home/container/server/config/avatars.json ]; then
-  cp -r /opt/pokemon-showdown/server/config.template/avatars.json /home/container/server/config
+  echo "{}" > /home/container/server/config/avatars.json
 fi
 if [ ! -e /home/container/server/config/chat-plugins ]; then
   cp -r /opt/pokemon-showdown/server/config.template/chat-plugins /home/container/server/config

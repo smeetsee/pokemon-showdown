@@ -21,7 +21,6 @@ WORKDIR /opt/pokemon-showdown/server
 
 # Build the server
 RUN node build \
- && cp /opt/pokemon-showdown/server/config/avatars.json /opt/pokemon-showdown/server/config.template \
  && cp /opt/pokemon-showdown/server/config/chatrooms.json /opt/pokemon-showdown/server/config.template \
  && cp /opt/pokemon-showdown/server/config/config.js /opt/pokemon-showdown/server/config.template
 
