@@ -22,14 +22,14 @@ FROM node:20-alpine3.18
 RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite fontconfig \
     && adduser --disabled-password --home /home/container container
 
-# Copy over the client code from the builder stage
-WORKDIR /opt/pokemon-showdown/client
-COPY --from=builder /opt/pokemon-showdown/client /opt/pokemon-showdown/client
-
 # Copy the Caddy binary
 COPY --from=caddy /usr/bin/caddy /usr/bin/caddy
 ENV XDG_CONFIG_HOME /home/container/caddy/config
 ENV XDG_DATA_HOME /home/container/caddy/data
+
+# Copy over the client code from the builder stage
+WORKDIR /opt/pokemon-showdown/client
+COPY --from=builder /opt/pokemon-showdown/client /opt/pokemon-showdown/client
 
 # Run the container
 USER container
