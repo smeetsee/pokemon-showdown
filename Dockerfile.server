@@ -9,8 +9,8 @@ WORKDIR /opt/pokemon-showdown
 RUN git clone https://github.com/smogon/pokemon-showdown.git server \
  && rm -rf /opt/pokemon-showdown/server/.git \
 # Disable console & backdoor
- && sed -i 's/exports.backdoor = true;/exports.backdoor = false;/g' config/config-example.js \
- && sed -i 's/exports.consoleips = ['127.0.0.1'];/exports.consoleips = [];/g' config/config-example.js \
+ && sed -i 's/exports.backdoor = true;/exports.backdoor = false;/g' /opt/pokemon-showdown/server/config/config-example.js \
+ && sed -i 's/exports.consoleips = ['127.0.0.1'];/exports.consoleips = [];/g' /opt/pokemon-showdown/server/config/config-example.js \
  && mkdir /opt/pokemon-showdown/server/config.template \
  && cp /opt/pokemon-showdown/server/config/avatars /opt/pokemon-showdown/server/config.template \
  && cp /opt/pokemon-showdown/server/config/avatars.json /opt/pokemon-showdown/server/config.template \
