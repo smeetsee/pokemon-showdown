@@ -19,8 +19,10 @@ RUN git clone https://github.com/smogon/pokemon-showdown.git server \
  && cp /opt/pokemon-showdown/server/config/proxies.csv /opt/pokemon-showdown/server/config.template
 WORKDIR /opt/pokemon-showdown/server
 
-# Build the server
-RUN node build
+# Build the server & symlink dist files
+RUN node build \
+ && rm -rf /opt/pokemon-showdown/server/dist \
+ && ln -sf /home/container/server/dist /opt/pokemon-showdown/server
 
 # Symlink the config files from /home/container
 RUN rm -rf /opt/pokemon-showdown/server/config/avatars \
