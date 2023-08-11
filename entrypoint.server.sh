@@ -1,6 +1,7 @@
 #!/bin/bash
 cd /home/container
 
+mkdir -p /home/container/server/dist
 mkdir -p /home/container/server/config
 
 # Create config files & directories
