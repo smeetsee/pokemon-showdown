@@ -23,14 +23,14 @@ WORKDIR /opt/pokemon-showdown/server
 RUN node build
 
 # Symlink the config files from /home/container
-RUN rm -rf /home/container/server/config/avatars \
+RUN rm -rf /opt/pokemon-showdown/server/config/avatars \
  && ln -sf /home/container/server/config/avatars /opt/pokemon-showdown/server/config \
  && ln -sf /home/container/server/config/avatars.json /opt/pokemon-showdown/server/config \
- && rm -rf /home/container/server/config/chat-plugins \
+ && rm -rf /opt/pokemon-showdown/server/config/chat-plugins \
  && ln -sf /home/container/server/config/chat-plugins /opt/pokemon-showdown/server/config \
  && ln -sf /home/container/server/config/chatrooms.json /opt/pokemon-showdown/server/config \
  && ln -sf /home/container/server/config/config.js /opt/pokemon-showdown/server/config \
- && rm -rf /home/container/server/config/ladders \
+ && rm -rf /opt/pokemon-showdown/server/config/ladders \
  && ln -sf /home/container/server/config/ladders /opt/pokemon-showdown/server/config \
  && ln -sf /home/container/server/config/usergroups.csv /opt/pokemon-showdown/server/config \
  && ln -sf /home/container/server/config/hosts.csv /opt/pokemon-showdown/server/config \
