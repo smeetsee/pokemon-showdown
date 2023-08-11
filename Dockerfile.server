@@ -44,6 +44,6 @@ ENV  USER=container HOME=/home/container
 
 WORKDIR /home/container
 
-COPY ./entrypoint.server.sh /entrypoint.sh
+COPY --chmod=0555 ./entrypoint.server.sh /entrypoint.sh
 
 CMD ["/bin/bash", "/entrypoint.sh"]
