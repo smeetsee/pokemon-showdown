@@ -9,6 +9,7 @@ mkdir -p /home/container/server/server
 ln -sf /opt/pokemon-showdown/server/node_modules /home/container/server
 ln -sf /opt/pokemon-showdown/server/server/static /home/container/server/server/static
 ln -sf /home/container/server/dist/server/chat-commands /home/container/dist/server/chat-commands
+ln -sf /home/container/server/dist/server/chat-plugins /home/container/dist/server/chat-plugins
 
 # Create config files & directories
 if [ ! -e /home/container/server/config/avatars ]; then
