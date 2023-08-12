@@ -3,10 +3,12 @@ cd /home/container
 
 mkdir -p /home/container/server/config
 mkdir -p /home/container/server/dist
+mkdir -p /home/container/dist/server
 mkdir -p /home/container/server/logs
 mkdir -p /home/container/server/server
 ln -sf /opt/pokemon-showdown/server/node_modules /home/container/server
 ln -sf /opt/pokemon-showdown/server/server/static /home/container/server/server/static
+ln -sf /home/container/server/dist/server/chat-commands /home/container/dist/server/chat-commands
 
 # Create config files & directories
 if [ ! -e /home/container/server/config/avatars ]; then
