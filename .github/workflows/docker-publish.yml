@@ -80,7 +80,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           file: Dockerfile.server
-          platforms: linux/amd64, linux/arm64/v8, linux/ppc64le, linux/s390x
+          platforms: linux/amd64, linux/arm64/v8, linux/ppc64le
 
 
       # Sign the resulting Docker image digest except on PRs.
